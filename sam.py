@@ -45,24 +45,25 @@ def root():
         exp = ""
 
 
-def pi():
+def log():
     try:
         global exp
 
-        rslt = math.pi(float(exp))
+        rslt = math.log(float(exp))
         entry.set(rslt)
         exp = ""
 
     except:
-        entry.set('error')
+        entry.set("error")
         exp = ""
 
 
 normalFrame = Frame(gui)
 normalFrame.pack()
 display = Entry(normalFrame, font=('arial', 15, 'bold'), textvariable=entry, bd=20,
-                insertwidth=4, insertbackground='tomato', bg="powder blue", fg="black", justify=CENTER)
+                insertwidth=4, insertbackground='tomato', bg="powder blue", fg="black", justify=RIGHT)
 display.pack(side=TOP, pady=10, padx=10, fill=X)
+# entry.set("enter num")
 
 # top_line
 
@@ -73,10 +74,10 @@ bClear = Button(btnFrame, padx=16, bd=8, fg="black", font=('arial', 10, 'bold'),
                 text="C", bg="tomato", command=Clear).grid(row=0, column=0)
 
 btnLefBrkt = Button(btnFrame, padx=16, bd=8, fg="black", font=('arial', 10, 'bold'),
-                    text="(", bg="Honeydew3", command=lambda: press("(")).grid(row=0, column=1)
+                 text="(", bg="Honeydew3", command=lambda : press("(")).grid(row=0, column=1)
 
 btnRghtBrkt = Button(btnFrame, padx=15, bd=8, fg="black", font=('arial', 10, 'bold'),
-                     text=")", bg="Honeydew3", command=lambda: press(")")).grid(row=0, column=2)
+                text=")", bg="Honeydew3", command=lambda: press(")")).grid(row=0, column=2)
 
 btnDiv = Button(btnFrame, padx=16, bd=8, fg="black", font=('arial', 10, 'bold'),
                 text="/", bg="Honeydew3", command=lambda: press("/")).grid(row=0, column=3)
@@ -132,8 +133,8 @@ btnZero = Button(btnFrame, padx=16, bd=8, fg="black", font=('arial', 10, 'bold')
 
 # btnPlusMinus=Button(cal,padx=16,bd=8,fg="black",font=('arial',20,'bold'),
 #                text="+/-",bg="Honeydew3").grid(row=5,column=2)
-btnPerc = Button(btnFrame, padx=10, bd=8, fg="black", font=('arial', 10, 'bold'),
-                 text=" % ", bg="Honeydew3", command=lambda: press("/100")).grid(row=5, column=2)
+btnlog = Button(btnFrame, padx=10, bd=8, fg="black", font=('arial', 10, 'bold'),
+                text="log", bg="Honeydew3", command=lambda: log()).grid(row=5, column=2)
 
 btnEquals = Button(btnFrame, padx=16, bd=8, fg="black", font=('arial', 10, 'bold'),
 
@@ -142,57 +143,14 @@ btnEquals = Button(btnFrame, padx=16, bd=8, fg="black", font=('arial', 10, 'bold
 # Scientificmode
 
 sFrame = Frame(gui)
-
+#sFrame.config(padx=8)
 normalMode = True
-
-
-def printName(event):
-    print("btn..")
-
-    btn = event.widget
-    text = btn['text']
-    print(text)
-    exp = entry.get()
-    ans = ""
-
-    if text == "  rad ":
-        ans = math.radians(float(exp))
-
-    elif text == "  deg ":
-        ans = math.degrees(float(exp))
-
-    elif text == " x2 ":
-        ans = float(exp) * float(exp)
-
-    elif text == " x! ":
-        ans = math.factorial(float(exp))
-
-    elif text == " sin ":
-        ans = str(math.sin(math.radians(int(exp))))
-    elif text == " cos ":
-        ans = str(math.sin(math.radians(int(exp))))
-
-    elif text == " tan ":
-        ans = str(math.sin(math.radians(int(exp))))
-    elif text == " log ":
-        ans = math.log(float(exp))
-    elif text == " √ x ":
-        ans = math.sqrt(int(exp))
-        print(ans)
-        entry.set(ans)
-    elif text == " ℮x ":
-        ans = math.exp(float(exp))
-
-    elif text == " π ":
-        ans = math.pi
-    entry.set(ans)
-    print(ans)
 
 
 def scientific():
     global normalMode
     if normalMode:
-        print("show scntfc")
+        print(" show scntfc")
         sFrame.pack(side=TOP)
         btnFrame.pack(side=TOP)
 
@@ -207,71 +165,43 @@ def scientific():
 # firstrow
 
 btnpi = Button(sFrame, padx=15, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-               text=" π ")
-btnpi.grid(row=0, column=0)
+               text=" π ", command=lambda: press("* 3.1415")).grid(row=0, column=0)
 
-btnPower = Button(sFrame, padx=10, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                  text=" x  2 ")
-btnPower.grid(row=0, column=1)
+btnpower = Button(sFrame, padx=10, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
+                  text=" x^ ", command=lambda: press(2)).grid(row=0, column=1)
 
 btnFact = Button(sFrame, padx=14, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                 text=" x ! ")
-btnFact.grid(row=0, column=2)
+                 text=" x! ", command=lambda: press(3)).grid(row=0, column=2)
 
-btnRad = Button(sFrame, padx=11, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                text="  rad ")
-btnRad.grid(row=0, column=3)
+btnrad = Button(sFrame, padx=11, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
+                text="rad", command=lambda: press(3)).grid(row=0, column=3)
 
 # secondrow
 
-btnSin = Button(sFrame, padx=10, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                text=" sin ")
-btnSin.grid(row=1, column=0)
+btnsin = Button(sFrame, padx=10, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
+                text="sinθ", command=lambda: press(3)).grid(row=1, column=0)
 
 btnCos = Button(sFrame, padx=12, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                text=" cos ")
-btnCos.grid(row=1, column=1)
+                text="cosθ", command=lambda: press(3)).grid(row=1, column=1)
 
 btnTan = Button(sFrame, padx=12, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                text=" tan ")
-btnTan.grid(row=1, column=2)
-
+                text="tanθ", command=lambda: press(3)).grid(row=1, column=2)
 btnDeg = Button(sFrame, padx=11, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                text="  deg ")
-btnDeg.grid(row=1, column=3)
+                text="deg", command=lambda: press(3)).grid(row=1, column=3)
 
-# thirdrow
+#thirdrow
 
 btnLog = Button(sFrame, padx=10, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                text=" log ")
-btnLog.grid(row=2, column=0)
+                text=" log ", command=lambda: press(3)).grid(row=2, column=0)
 
 btnRoot = Button(sFrame, padx=12, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                 text=" √ x ")
-btnRoot.grid(row=2, column=1)
+                text=" √x ", command=lambda: press(3)).grid(row=2, column=1)
 
 btnExpo = Button(sFrame, padx=12, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                 text=" ℮x ")
-btnExpo.grid(row=2, column=2)
+                text=" ℮x ", command=lambda: press(3)).grid(row=2, column=2)
+btnPer = Button(sFrame, padx=11, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
+                text=" %  ", command=lambda: press("/100")).grid(row=2, column=3)
 
-btnMod = Button(sFrame, padx=11, bd=8, fg="black", bg="honeydew3", font=('arial', 10, 'bold'),
-                text=" mod ")
-btnMod.grid(row=2, column=3)
-
-# butonbinding
-
-btnpi.bind("<Button-1>", printName)
-btnPower.bind("<Button-1>", printName)
-btnFact.bind("<Button-1>", printName)
-btnRad.bind("<Button-1>", printName)
-btnSin.bind("<Button-1>", printName)
-btnCos.bind("<Button-1>", printName)
-btnTan.bind("<Button-1>", printName)
-btnDeg.bind("<Button-1>", printName)
-btnLog.bind("<Button-1>", printName)
-btnRoot.bind("<Button-1>", printName)
-btnExpo.bind("<Button-1>", printName)
-btnMod.bind("<Button-1>", printName)
 
 menubar = Menu(gui)
 mod = Menu(menubar, tearoff=0)
