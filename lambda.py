@@ -33,31 +33,6 @@ def Equal():
         exp = ""
 
 
-def root():
-    try:
-        global exp
-        value = math.sqrt(float(exp))
-        entry.set(value)
-        exp = ""
-
-    except:
-        entry.set(' sqrt(0) ')
-        exp = ""
-
-
-def pi():
-    try:
-        global exp
-
-        rslt = math.pi(float(exp))
-        entry.set(rslt)
-        exp = ""
-
-    except:
-        entry.set('error')
-        exp = ""
-
-
 normalFrame = Frame(gui)
 normalFrame.pack()
 display = Entry(normalFrame, font=('arial', 15, 'bold'), textvariable=entry, bd=20,
@@ -158,35 +133,48 @@ def printName(event):
     if text == "  rad ":
         ans = math.radians(float(exp))
 
+
     elif text == "  deg ":
         ans = math.degrees(float(exp))
 
-    elif text == " x2 ":
+    elif text == " x  2 ":
         ans = float(exp) * float(exp)
 
-    elif text == " x! ":
+    elif text == " x ! ":
         ans = math.factorial(float(exp))
 
     elif text == " sin ":
-        ans = str(math.sin(math.radians(int(exp))))
+
+        ans = str(math.sin(math.radians(float(exp))))
+
     elif text == " cos ":
-        ans = str(math.sin(math.radians(int(exp))))
+
+        ans = str(math.cos(math.radians(float(exp))))
 
     elif text == " tan ":
-        ans = str(math.sin(math.radians(int(exp))))
+        ans = str(math.tan(math.radians(float(exp))))
+
     elif text == " log ":
         ans = math.log(float(exp))
+
     elif text == " √ x ":
-        ans = math.sqrt(int(exp))
-        print(ans)
-        entry.set(ans)
+        ans = math.sqrt(float(exp))
+
+
     elif text == " ℮x ":
-        ans = math.exp(float(exp))
+        try:
+            ans = math.exp(float(exp))
+        except:
+            ans = display.set(math.pi)
 
     elif text == " π ":
-        ans = math.pi
-    entry.set(ans)
-    print(ans)
+        ans = int(exp) * math.pi
+
+    elif text == " mod ":
+        ans = math.modf(float(exp))
+
+    display.delete(0, END)
+    display.insert(0, ans)
 
 
 def scientific():
